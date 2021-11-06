@@ -6,7 +6,7 @@
 /*   By: wyohei <wyohei@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 19:01:47 by wyohei            #+#    #+#             */
-/*   Updated: 2021/10/16 18:20:03 by wyohei           ###   ########.fr       */
+/*   Updated: 2021/11/06 20:34:37 by wyohei           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ long long	lst_in_array(t_stack *top, int	size, char	c)
 
 	i = 0;
 	array = (long long *)malloc((sizeof(long long) * size));
+	if (array == NULL)
+		return (2147483648);
 	while (i < size && top != NULL)
 	{
 		array[i] = top->idx;

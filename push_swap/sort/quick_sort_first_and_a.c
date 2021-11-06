@@ -6,7 +6,7 @@
 /*   By: wyohei <wyohei@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 19:26:43 by wyohei            #+#    #+#             */
-/*   Updated: 2021/10/15 19:26:44 by wyohei           ###   ########.fr       */
+/*   Updated: 2021/11/06 20:30:08 by wyohei           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,13 @@ static void	sort_idx_a(t_stack	**a, t_stack	**b, t_count	*count, \
 
 	pivot.big = lst_in_array(*a, size, 'b');
 	pivot.low = lst_in_array(*a, size, 's');
+	if (pivot.low == 2147483648 || pivot.big == 2147483648)
+	{
+		lstclear(a);
+		lstclear(b);
+		write_error();
+		exit(1);
+	}
 	i = 0;
 	while (i < size && (*a) != NULL)
 	{

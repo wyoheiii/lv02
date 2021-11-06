@@ -6,46 +6,53 @@
 /*   By: wyohei <wyohei@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 19:20:28 by wyohei            #+#    #+#             */
-/*   Updated: 2021/10/15 19:20:29 by wyohei           ###   ########.fr       */
+/*   Updated: 2021/11/06 20:31:33 by wyohei           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-static void	sort_idx_b_else(t_stack	**top, t_stack	**top2, t_count	*count, \
+static void	sort_idx_b_else(t_stack	**a, t_stack	**b, t_count	*count, \
 				t_pivot	pivot)
 {
-	write_command_a(top, top2, "pa");
+	write_command_a(a, b, "pa");
 	count->pa_count++;
-	if ((*top)->idx < pivot.big)
+	if ((*a)->idx < pivot.big)
 	{
-		write_command_a(top, top2, "ra");
+		write_command_a(a, b, "ra");
 		count->ra_count++;
 	}
 }
 
-static void	sort_idx_b(t_stack	**top, t_stack	**top2, t_count	*count, \
+static void	sort_idx_b(t_stack	**a, t_stack	**b, t_count	*count, \
 	int	size)
 {
 	t_pivot	pivot;
 	int		i;
 
-	pivot.big = lst_in_array(*top2, size, 'b');
-	pivot.low = lst_in_array(*top2, size, 's');
-	i = 0;
-	while (i < size && (*top2) != NULL)
+	pivot.big = lst_in_array(*b, size, 'b');
+	pivot.low = lst_in_array(*b, size, 's');
+	if (pivot.low == 2147483648 || pivot.big == 2147483648)
 	{
-		if ((*top2)->idx < pivot.low)
+		lstclear(a);
+		lstclear(b);
+		write_error();
+		exit(1);
+	}
+	i = 0;
+	while (i < size && (*b) != NULL)
+	{
+		if ((*b)->idx < pivot.low)
 		{
-			write_command_b(top, top2, "rb");
+			write_command_b(a, b, "rb");
 			count->rb_count++;
 		}
 		else
-			sort_idx_b_else(top, top2, count, pivot);
+			sort_idx_b_else(a, b, count, pivot);
 		i++;
 	}
 }
 
-void	quick_sort_b(t_stack	**top, t_stack	**top2, int	size)
+void	quick_sort_b(t_stack	**a, t_stack	**b, int	size)
 {
 	t_count	count;
 
@@ -53,22 +60,22 @@ void	quick_sort_b(t_stack	**top, t_stack	**top2, int	size)
 	{
 		if (size == 2)
 		{
-			if ((*top2)->idx < (*top2)->next->idx)
-				write_command_b(top, top2, "sb");
+			if ((*b)->idx < (*b)->next->idx)
+				write_command_b(a, b, "sb");
 		}
 		else if (size == 3)
-			quick_three_sort_b(top, top2);
+			quick_three_sort_b(a, b);
 		while (size > 0)
 		{
-			write_command_a(top, top2, "pa");
+			write_command_a(a, b, "pa");
 			size--;
 		}
 		return ;
 	}
 	initialization(&count);
-	sort_idx_b(top, top2, &count, size);
-	quick_sort_a(top, top2, count.pa_count - count.ra_count);
-	reverse_idx(top, top2, count);
-	quick_sort_a(top, top2, count.ra_count);
-	quick_sort_b(top, top2, count.rb_count);
+	sort_idx_b(a, b, &count, size);
+	quick_sort_a(a, b, count.pa_count - count.ra_count);
+	reverse_idx(a, b, count);
+	quick_sort_a(a, b, count.ra_count);
+	quick_sort_b(a, b, count.rb_count);
 }
