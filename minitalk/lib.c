@@ -6,7 +6,7 @@
 /*   By: wyohei <wyohei@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 17:14:36 by wyohei            #+#    #+#             */
-/*   Updated: 2021/10/27 17:14:37 by wyohei           ###   ########.fr       */
+/*   Updated: 2021/11/07 13:12:56 by wyohei           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,28 +52,38 @@ void	ft_putstr_fd(char	*s, int	fd)
 	}
 }
 
-int	ft_atoi(const char	*str)
+long long	ft_atoi(const char	*str)
 {
-	size_t	i;
-	int		check;
-	int		total;
+	size_t		i;
+	long long	check;
+	long long	total;
 
-	total = 0;
 	check = 1;
+	total = 0;
 	i = 0;
-	while ((str[i] == ' ') || (str[i] == '\t') || (str[i] == '\n') \
-			|| (str[i] == '\v') || (str[i] == '\r') || (str[i] == '\f'))
-		i++;
-	if (str[i] == '+' || str[i] == '-')
+	if (str[i] == '-')
 	{
-		if (str[i] == '-')
-			check = check * -1;
+		check = check * -1;
 		i++;
 	}
 	while (str[i] >= '0' && str[i] <= '9')
 	{
 		total = total * 10 + str[i] - '0';
+		if (total > INT_MAX && check == 1)
+			return (2147483648);
+		if (((total) * check) < INT_MIN && check == -1)
+			return (2147483648);
 		i++;
 	}
-	return ((int)total * check);
+	return (total * check);
+}
+
+size_t	ft_strlen(const char	*s)
+{
+	size_t	i;
+
+	i = 0;
+	while (s[i] != '\0')
+		i++;
+	return (i);
 }
