@@ -6,7 +6,7 @@
 /*   By: wyohei <wyohei@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 17:45:42 by wyohei            #+#    #+#             */
-/*   Updated: 2021/10/16 18:20:15 by wyohei           ###   ########.fr       */
+/*   Updated: 2021/11/07 21:22:04 by wyohei           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,11 @@ int	check_sort(t_stack	*top)
 
 	size = ft_lstsize(top);
 	array = (long long *)malloc((sizeof(long long) * size));
+	if (array == NULL)
+	{
+		write_error();
+		return (-1);
+	}
 	i = 0;
 	while (i < size && top != NULL)
 	{

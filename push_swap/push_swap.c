@@ -6,12 +6,12 @@
 /*   By: wyohei <wyohei@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 10:03:38 by wyohei            #+#    #+#             */
-/*   Updated: 2021/10/16 17:22:36 by wyohei           ###   ########.fr       */
+/*   Updated: 2021/11/07 21:05:36 by wyohei           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-static void	check_sorted(t_stack	**a, t_stack	**b)
+static void	check_sorted_main(t_stack	**a, t_stack	**b)
 {
 	if (check_sort(*a) == -1)
 		return ;
@@ -57,7 +57,7 @@ static int	push_swap(int	ac, char	**av)
 		ft_lstadd_back(&a, new);
 		i++;
 	}
-	check_sorted(&a, &b);
+	check_sorted_main(&a, &b);
 	lstclear(&a);
 	lstclear(&b);
 	return (0);
