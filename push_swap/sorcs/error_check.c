@@ -6,7 +6,7 @@
 /*   By: wyohei <wyohei@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 17:45:48 by wyohei            #+#    #+#             */
-/*   Updated: 2021/10/15 17:45:49 by wyohei           ###   ########.fr       */
+/*   Updated: 2021/11/07 13:22:38 by wyohei           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int	check_digit(char	*str)
 		if (!(str[1] >= '1' && str[1] <= '9'))
 			return (-1);
 	}
+	if (!(str[0] >= '1' && str[0] <= '9'))
+		return (-1);
 	while (str[i] != '\0')
 	{
 		flag = ft_isdigit(str[i]);
