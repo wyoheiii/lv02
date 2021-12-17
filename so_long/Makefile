@@ -12,7 +12,12 @@ MLX_NAME = minilibx-linux
 MLXD = ./$(MLX_NAME)
 MLX = $(MLXD)/libmlx.a
 LINK = -L$(MLX_NAME) -lmlx -I$(MLX_NAME) -lXext -lX11 -lm
-
+#L  dirをみる -l mlx mlxの.aを探しに行くつなげて.a省略 x11はパソコンの中にあるx11のライブラリとかの lmはマウスの方math.h
+#しかし, C の標準関数の中には, 「数学関数」と呼ばれる関数群があり62, これらの実体は標準関数には
+#入っていない. 数学関数ライブラリは UNIX の場合には通常は /usr/lib/libm.a であり, 数学関数ライ
+#ブラリ63を必要とする場合には,のように, -lm というオプションをリンカに渡す必要がある64. 最後に, なぜ -lm オプションを最後につけ
+#るかという理由を考えてみよう. 例えば, file1.o は関数 sin の呼び出しを含むとき,
+#gcc file1.o file2.o -o target -lm
 all:	 $(NAME)
 
 $(NAME):	$(OBJS) $(LIBFT) $(MLX)
